@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Austin Sharrah">
+
+<title>Lab_3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Lab_3_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Lab_3_files/libs/quarto-html/quarto.js"></script>
+<script src="Lab_3_files/libs/quarto-html/popper.min.js"></script>
+<script src="Lab_3_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Lab_3_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Lab_3_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Lab_3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Lab_3_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Lab_3_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Lab_3_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="Lab_3_files/libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+
+<script src="Lab_3_files/libs/tabwid-1.1.3/tabwid.js"></script>
+
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lab_3</h1>
+<p class="subtitle lead">ESS 330</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Austin Sharrah <a href="mailto:sharraha@colostate.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zoo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'zoo'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    as.Date, as.Date.numeric</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ forcats   1.0.0     ✔ readr     2.1.5
+✔ ggplot2   3.5.1     ✔ stringr   1.5.1
+✔ lubridate 1.9.4     ✔ tibble    3.2.1
+✔ purrr     1.0.2     ✔ tidyr     1.3.1
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ purrr::compose() masks flextable::compose()
+✖ dplyr::filter()  masks stats::filter()
+✖ dplyr::lag()     masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>url<span class="ot">=</span><span class="st">'https://raw.githubusercontent.com/nytimes/covid-19-data/refs/heads/master/us-counties.csv'</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>covid_data <span class="ot">=</span> <span class="fu">read_csv</span>(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 2502832 Columns: 6
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (3): county, state, fips
+dbl  (2): cases, deaths
+date (1): date
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>txt <span class="ot">&lt;-</span> <span class="st">"2022-01-01"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(txt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="st">"2022-01-01"</span> <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(txt)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="st">"2022-01-01"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Colorado <span class="ot">&lt;-</span> covid_data <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"Colorado"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(county) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(date) <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">new_cases=</span>cases<span class="sc">-</span><span class="fu">lag</span>(cases),<span class="at">new_deaths=</span>deaths<span class="sc">-</span><span class="fu">lag</span>(deaths)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(Colorado, date <span class="sc">==</span> <span class="st">"2022-01-01"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(cases,<span class="at">n=</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">Date =</span> date, <span class="at">County =</span> county, <span class="at">Cases =</span> cases) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flextable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_caption</span>(<span class="st">"Most Total Cases"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-3191e23c{}.cl-3182f556{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-31880e6a{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-31880e74{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-318839ee{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-318839ef{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-318839f8{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-31883a02{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-31883a03{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-31883a04{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-3191e23c"><thead><tr style="overflow-wrap:break-word;"><th class="cl-318839ee"><p class="cl-31880e6a"><span class="cl-3182f556">Date</span></p></th><th class="cl-318839ef"><p class="cl-31880e74"><span class="cl-3182f556">County</span></p></th><th class="cl-318839ee"><p class="cl-31880e6a"><span class="cl-3182f556">Cases</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-318839f8"><p class="cl-31880e6a"><span class="cl-3182f556">2022-01-01</span></p></td><td class="cl-31883a02"><p class="cl-31880e74"><span class="cl-3182f556">El Paso</span></p></td><td class="cl-318839f8"><p class="cl-31880e6a"><span class="cl-3182f556">125,644</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-318839f8"><p class="cl-31880e6a"><span class="cl-3182f556">2022-01-01</span></p></td><td class="cl-31883a02"><p class="cl-31880e74"><span class="cl-3182f556">Denver</span></p></td><td class="cl-318839f8"><p class="cl-31880e6a"><span class="cl-3182f556">117,579</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-318839f8"><p class="cl-31880e6a"><span class="cl-3182f556">2022-01-01</span></p></td><td class="cl-31883a02"><p class="cl-31880e74"><span class="cl-3182f556">Arapahoe</span></p></td><td class="cl-318839f8"><p class="cl-31880e6a"><span class="cl-3182f556">103,551</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-318839f8"><p class="cl-31880e6a"><span class="cl-3182f556">2022-01-01</span></p></td><td class="cl-31883a02"><p class="cl-31880e74"><span class="cl-3182f556">Adams</span></p></td><td class="cl-318839f8"><p class="cl-31880e6a"><span class="cl-3182f556">95,323</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31883a03"><p class="cl-31880e6a"><span class="cl-3182f556">2022-01-01</span></p></td><td class="cl-31883a04"><p class="cl-31880e74"><span class="cl-3182f556">Jefferson</span></p></td><td class="cl-31883a03"><p class="cl-31880e6a"><span class="cl-3182f556">82,540</span></p></td></tr></tbody></table></div>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(Colorado, date <span class="sc">==</span> <span class="st">"2022-01-01"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(cases, <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">Date =</span> date, <span class="at">County =</span> county, <span class="at">Cases =</span> new_cases) <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flextable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_caption</span>(<span class="at">caption =</span> <span class="st">"Most New Cases"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-31af7ee6{}.cl-31a3833e{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-31a8f4ae{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-31a8f4c2{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-31a91e70{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-31a91e7a{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-31a91e7b{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-31a91e84{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-31a91e8e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-31a91e8f{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-31af7ee6"><thead><tr style="overflow-wrap:break-word;"><th class="cl-31a91e70"><p class="cl-31a8f4ae"><span class="cl-31a3833e">Date</span></p></th><th class="cl-31a91e7a"><p class="cl-31a8f4c2"><span class="cl-31a3833e">County</span></p></th><th class="cl-31a91e70"><p class="cl-31a8f4ae"><span class="cl-31a3833e">Cases</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-31a91e7b"><p class="cl-31a8f4ae"><span class="cl-31a3833e">2022-01-01</span></p></td><td class="cl-31a91e84"><p class="cl-31a8f4c2"><span class="cl-31a3833e">El Paso</span></p></td><td class="cl-31a91e7b"><p class="cl-31a8f4ae"><span class="cl-31a3833e">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a91e7b"><p class="cl-31a8f4ae"><span class="cl-31a3833e">2022-01-01</span></p></td><td class="cl-31a91e84"><p class="cl-31a8f4c2"><span class="cl-31a3833e">Denver</span></p></td><td class="cl-31a91e7b"><p class="cl-31a8f4ae"><span class="cl-31a3833e">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a91e7b"><p class="cl-31a8f4ae"><span class="cl-31a3833e">2022-01-01</span></p></td><td class="cl-31a91e84"><p class="cl-31a8f4c2"><span class="cl-31a3833e">Arapahoe</span></p></td><td class="cl-31a91e7b"><p class="cl-31a8f4ae"><span class="cl-31a3833e">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a91e7b"><p class="cl-31a8f4ae"><span class="cl-31a3833e">2022-01-01</span></p></td><td class="cl-31a91e84"><p class="cl-31a8f4c2"><span class="cl-31a3833e">Adams</span></p></td><td class="cl-31a91e7b"><p class="cl-31a8f4ae"><span class="cl-31a3833e">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-31a91e8e"><p class="cl-31a8f4ae"><span class="cl-31a3833e">2022-01-01</span></p></td><td class="cl-31a91e8f"><p class="cl-31a8f4c2"><span class="cl-31a3833e">Jefferson</span></p></td><td class="cl-31a91e8e"><p class="cl-31a8f4ae"><span class="cl-31a3833e">0</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>my_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2022-02-01"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>my_state <span class="ot">&lt;-</span> <span class="st">"Colorado"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#3</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>Colorado <span class="ot">&lt;-</span> covid_data <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> my_state) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(county) <span class="sc">%&gt;%</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(date) <span class="sc">%&gt;%</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">new_cases =</span> cases <span class="sc">-</span> <span class="fu">lag</span>(cases), <span class="at">new_deaths =</span> deaths <span class="sc">-</span> <span class="fu">lag</span>(deaths)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>most_cumulative_cases <span class="ot">&lt;-</span> <span class="fu">filter</span>(Colorado, date <span class="sc">==</span> my_date) <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(cases, <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">Date =</span> date, <span class="at">County =</span> county, <span class="at">Cases =</span> cases) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flextable</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_caption</span>(<span class="st">"Most Total Cases"</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>most_new_cases <span class="ot">&lt;-</span> <span class="fu">filter</span>(Colorado, date <span class="sc">==</span> my_date) <span class="sc">%&gt;%</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(cases, <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flextable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_caption</span>(<span class="at">caption =</span> <span class="st">"Most New Cases"</span>)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>most_cumulative_cases</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-3209597a{}.cl-31feb0ce{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3202a9cc{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3202a9e0{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3202df82{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3202df96{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3202df97{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3202dfa0{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3202dfaa{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3202dfab{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-3209597a"><thead><tr style="overflow-wrap:break-word;"><th class="cl-3202df82"><p class="cl-3202a9cc"><span class="cl-31feb0ce">Date</span></p></th><th class="cl-3202df96"><p class="cl-3202a9e0"><span class="cl-31feb0ce">County</span></p></th><th class="cl-3202df82"><p class="cl-3202a9cc"><span class="cl-31feb0ce">Cases</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-3202df97"><p class="cl-3202a9cc"><span class="cl-31feb0ce">2022-02-01</span></p></td><td class="cl-3202dfa0"><p class="cl-3202a9e0"><span class="cl-31feb0ce">El Paso</span></p></td><td class="cl-3202df97"><p class="cl-3202a9cc"><span class="cl-31feb0ce">170,673</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3202df97"><p class="cl-3202a9cc"><span class="cl-31feb0ce">2022-02-01</span></p></td><td class="cl-3202dfa0"><p class="cl-3202a9e0"><span class="cl-31feb0ce">Denver</span></p></td><td class="cl-3202df97"><p class="cl-3202a9cc"><span class="cl-31feb0ce">159,022</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3202df97"><p class="cl-3202a9cc"><span class="cl-31feb0ce">2022-02-01</span></p></td><td class="cl-3202dfa0"><p class="cl-3202a9e0"><span class="cl-31feb0ce">Arapahoe</span></p></td><td class="cl-3202df97"><p class="cl-3202a9cc"><span class="cl-31feb0ce">144,255</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3202df97"><p class="cl-3202a9cc"><span class="cl-31feb0ce">2022-02-01</span></p></td><td class="cl-3202dfa0"><p class="cl-3202a9e0"><span class="cl-31feb0ce">Adams</span></p></td><td class="cl-3202df97"><p class="cl-3202a9cc"><span class="cl-31feb0ce">126,768</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3202dfaa"><p class="cl-3202a9cc"><span class="cl-31feb0ce">2022-02-01</span></p></td><td class="cl-3202dfab"><p class="cl-3202a9e0"><span class="cl-31feb0ce">Jefferson</span></p></td><td class="cl-3202dfaa"><p class="cl-3202a9cc"><span class="cl-31feb0ce">113,240</span></p></td></tr></tbody></table></div>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>most_new_cases</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-3219410a{}.cl-320eec5a{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-321303bc{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-321303d0{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-32132f90{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-32132fa4{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-32132fae{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-32132faf{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-32132fb8{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-32132fb9{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-3219410a"><thead><tr style="overflow-wrap:break-word;"><th class="cl-32132f90"><p class="cl-321303bc"><span class="cl-320eec5a">date</span></p></th><th class="cl-32132fa4"><p class="cl-321303d0"><span class="cl-320eec5a">county</span></p></th><th class="cl-32132fa4"><p class="cl-321303d0"><span class="cl-320eec5a">state</span></p></th><th class="cl-32132fa4"><p class="cl-321303d0"><span class="cl-320eec5a">fips</span></p></th><th class="cl-32132f90"><p class="cl-321303bc"><span class="cl-320eec5a">cases</span></p></th><th class="cl-32132f90"><p class="cl-321303bc"><span class="cl-320eec5a">deaths</span></p></th><th class="cl-32132f90"><p class="cl-321303bc"><span class="cl-320eec5a">new_cases</span></p></th><th class="cl-32132f90"><p class="cl-321303bc"><span class="cl-320eec5a">new_deaths</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">2022-02-01</span></p></td><td class="cl-32132faf"><p class="cl-321303d0"><span class="cl-320eec5a">El Paso</span></p></td><td class="cl-32132faf"><p class="cl-321303d0"><span class="cl-320eec5a">Colorado</span></p></td><td class="cl-32132faf"><p class="cl-321303d0"><span class="cl-320eec5a">08041</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">170,673</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">1,518</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">630</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">7</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">2022-02-01</span></p></td><td class="cl-32132faf"><p class="cl-321303d0"><span class="cl-320eec5a">Denver</span></p></td><td class="cl-32132faf"><p class="cl-321303d0"><span class="cl-320eec5a">Colorado</span></p></td><td class="cl-32132faf"><p class="cl-321303d0"><span class="cl-320eec5a">08031</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">159,022</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">1,194</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">389</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">9</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">2022-02-01</span></p></td><td class="cl-32132faf"><p class="cl-321303d0"><span class="cl-320eec5a">Arapahoe</span></p></td><td class="cl-32132faf"><p class="cl-321303d0"><span class="cl-320eec5a">Colorado</span></p></td><td class="cl-32132faf"><p class="cl-321303d0"><span class="cl-320eec5a">08005</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">144,255</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">1,172</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">401</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">2022-02-01</span></p></td><td class="cl-32132faf"><p class="cl-321303d0"><span class="cl-320eec5a">Adams</span></p></td><td class="cl-32132faf"><p class="cl-321303d0"><span class="cl-320eec5a">Colorado</span></p></td><td class="cl-32132faf"><p class="cl-321303d0"><span class="cl-320eec5a">08001</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">126,768</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">1,224</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">326</span></p></td><td class="cl-32132fae"><p class="cl-321303bc"><span class="cl-320eec5a">2</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-32132fb8"><p class="cl-321303bc"><span class="cl-320eec5a">2022-02-01</span></p></td><td class="cl-32132fb9"><p class="cl-321303d0"><span class="cl-320eec5a">Jefferson</span></p></td><td class="cl-32132fb9"><p class="cl-321303d0"><span class="cl-320eec5a">Colorado</span></p></td><td class="cl-32132fb9"><p class="cl-321303d0"><span class="cl-320eec5a">08059</span></p></td><td class="cl-32132fb8"><p class="cl-321303bc"><span class="cl-320eec5a">113,240</span></p></td><td class="cl-32132fb8"><p class="cl-321303bc"><span class="cl-320eec5a">1,219</span></p></td><td class="cl-32132fb8"><p class="cl-321303bc"><span class="cl-320eec5a">291</span></p></td><td class="cl-32132fb8"><p class="cl-321303bc"><span class="cl-320eec5a">7</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pop_url <span class="ot">&lt;-</span> <span class="st">'https://www2.census.gov/programs-surveys/popest/datasets/2020-2023/counties/totals/co-est2023-alldata.csv'</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>population_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(pop_url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 3195 Columns: 67
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (5): SUMLEV, STATE, COUNTY, STNAME, CTYNAME
+dbl (62): REGION, DIVISION, ESTIMATESBASE2020, POPESTIMATE2020, POPESTIMATE2...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(population_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 67
+  SUMLEV REGION DIVISION STATE COUNTY STNAME  CTYNAME        ESTIMATESBASE2020
+  &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;                      &lt;dbl&gt;
+1 040         3        6 01    000    Alabama Alabama                  5024294
+2 050         3        6 01    001    Alabama Autauga County             58809
+3 050         3        6 01    003    Alabama Baldwin County            231768
+4 050         3        6 01    005    Alabama Barbour County             25229
+5 050         3        6 01    007    Alabama Bibb County                22301
+6 050         3        6 01    009    Alabama Blount County              59130
+# ℹ 59 more variables: POPESTIMATE2020 &lt;dbl&gt;, POPESTIMATE2021 &lt;dbl&gt;,
+#   POPESTIMATE2022 &lt;dbl&gt;, POPESTIMATE2023 &lt;dbl&gt;, NPOPCHG2020 &lt;dbl&gt;,
+#   NPOPCHG2021 &lt;dbl&gt;, NPOPCHG2022 &lt;dbl&gt;, NPOPCHG2023 &lt;dbl&gt;, BIRTHS2020 &lt;dbl&gt;,
+#   BIRTHS2021 &lt;dbl&gt;, BIRTHS2022 &lt;dbl&gt;, BIRTHS2023 &lt;dbl&gt;, DEATHS2020 &lt;dbl&gt;,
+#   DEATHS2021 &lt;dbl&gt;, DEATHS2022 &lt;dbl&gt;, DEATHS2023 &lt;dbl&gt;, NATURALCHG2020 &lt;dbl&gt;,
+#   NATURALCHG2021 &lt;dbl&gt;, NATURALCHG2022 &lt;dbl&gt;, NATURALCHG2023 &lt;dbl&gt;,
+#   INTERNATIONALMIG2020 &lt;dbl&gt;, INTERNATIONALMIG2021 &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>population_data <span class="ot">&lt;-</span> population_data <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">STATE =</span> <span class="fu">sprintf</span>(<span class="st">"%02d"</span>, <span class="fu">as.numeric</span>(STATE)), <span class="at">COUNTY =</span> <span class="fu">sprintf</span>(<span class="st">"%03d"</span>, <span class="fu">as.numeric</span>(COUNTY)), <span class="at">FIP =</span> <span class="fu">paste0</span>(STATE, COUNTY))</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(population_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 68
+  SUMLEV REGION DIVISION STATE COUNTY STNAME  CTYNAME        ESTIMATESBASE2020
+  &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;                      &lt;dbl&gt;
+1 040         3        6 01    000    Alabama Alabama                  5024294
+2 050         3        6 01    001    Alabama Autauga County             58809
+3 050         3        6 01    003    Alabama Baldwin County            231768
+4 050         3        6 01    005    Alabama Barbour County             25229
+5 050         3        6 01    007    Alabama Bibb County                22301
+6 050         3        6 01    009    Alabama Blount County              59130
+# ℹ 60 more variables: POPESTIMATE2020 &lt;dbl&gt;, POPESTIMATE2021 &lt;dbl&gt;,
+#   POPESTIMATE2022 &lt;dbl&gt;, POPESTIMATE2023 &lt;dbl&gt;, NPOPCHG2020 &lt;dbl&gt;,
+#   NPOPCHG2021 &lt;dbl&gt;, NPOPCHG2022 &lt;dbl&gt;, NPOPCHG2023 &lt;dbl&gt;, BIRTHS2020 &lt;dbl&gt;,
+#   BIRTHS2021 &lt;dbl&gt;, BIRTHS2022 &lt;dbl&gt;, BIRTHS2023 &lt;dbl&gt;, DEATHS2020 &lt;dbl&gt;,
+#   DEATHS2021 &lt;dbl&gt;, DEATHS2022 &lt;dbl&gt;, DEATHS2023 &lt;dbl&gt;, NATURALCHG2020 &lt;dbl&gt;,
+#   NATURALCHG2021 &lt;dbl&gt;, NATURALCHG2022 &lt;dbl&gt;, NATURALCHG2023 &lt;dbl&gt;,
+#   INTERNATIONALMIG2020 &lt;dbl&gt;, INTERNATIONALMIG2021 &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(pop_url) <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(COUNTY <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fips =</span> <span class="fu">paste0</span>(<span class="fu">sprintf</span>(<span class="st">"%02d"</span>, STATE), <span class="fu">sprintf</span>(<span class="st">"%03d"</span>, COUNTY))) <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(fips, <span class="fu">contains</span>(<span class="st">'NAME'</span>), <span class="fu">contains</span>(<span class="st">'2021'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 3195 Columns: 67
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (5): SUMLEV, STATE, COUNTY, STNAME, CTYNAME
+dbl (62): REGION, DIVISION, ESTIMATESBASE2020, POPESTIMATE2020, POPESTIMATE2...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>FIP_data <span class="ot">&lt;-</span> population_data <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">FIP =</span> <span class="fu">paste0</span>(<span class="fu">sprintf</span>(<span class="st">"%02d"</span>, <span class="fu">as.numeric</span>(STATE)), <span class="fu">sprintf</span>(<span class="st">"%03d"</span>, <span class="fu">as.numeric</span>(COUNTY)))) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(COUNTY <span class="sc">==</span> <span class="st">"000"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(FIP, <span class="fu">contains</span>(<span class="st">"NAME"</span>), <span class="fu">contains</span>(<span class="st">"2021"</span>))</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(FIP_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 19
+  FIP   STNAME     CTYNAME    POPESTIMATE2021 NPOPCHG2021 BIRTHS2021 DEATHS2021
+  &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;                &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+1 01000 Alabama    Alabama            5050380       18516      57184      69135
+2 02000 Alaska     Alaska              734923        1959       9453       5330
+3 04000 Arizona    Arizona            7272487       85804      75693      80276
+4 05000 Arkansas   Arkansas           3028443       14095      34927      40180
+5 06000 California California        39145060     -358140     412506     345181
+6 08000 Colorado   Colorado           5811596       26377      62137      46481
+# ℹ 12 more variables: NATURALCHG2021 &lt;dbl&gt;, INTERNATIONALMIG2021 &lt;dbl&gt;,
+#   DOMESTICMIG2021 &lt;dbl&gt;, NETMIG2021 &lt;dbl&gt;, RESIDUAL2021 &lt;dbl&gt;,
+#   GQESTIMATES2021 &lt;dbl&gt;, RBIRTH2021 &lt;dbl&gt;, RDEATH2021 &lt;dbl&gt;,
+#   RNATURALCHG2021 &lt;dbl&gt;, RINTERNATIONALMIG2021 &lt;dbl&gt;, RDOMESTICMIG2021 &lt;dbl&gt;,
+#   RNETMIG2021 &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(FIP_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "FIP"                   "STNAME"                "CTYNAME"              
+ [4] "POPESTIMATE2021"       "NPOPCHG2021"           "BIRTHS2021"           
+ [7] "DEATHS2021"            "NATURALCHG2021"        "INTERNATIONALMIG2021" 
+[10] "DOMESTICMIG2021"       "NETMIG2021"            "RESIDUAL2021"         
+[13] "GQESTIMATES2021"       "RBIRTH2021"            "RDEATH2021"           
+[16] "RNATURALCHG2021"       "RINTERNATIONALMIG2021" "RDOMESTICMIG2021"     
+[19] "RNETMIG2021"          </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(FIP_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 51 19</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>Colorado_data <span class="ot">&lt;-</span> population_data <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(STATE <span class="sc">==</span> <span class="dv">8</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">FIP =</span> <span class="fu">paste0</span>(<span class="fu">sprintf</span>(<span class="st">"%02d"</span>, STATE), <span class="fu">sprintf</span>(<span class="st">"%03d"</span>, COUNTY)))</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>colorado_counties <span class="ot">&lt;-</span> Colorado_data <span class="sc">%&gt;%</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(COUNTY <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>pop_2021_col <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">'2021'</span>, <span class="fu">names</span>(colorado_counties), <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>population_range <span class="ot">&lt;-</span> <span class="fu">range</span>(population_data[pop_2021_col])</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>population_range</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  -458862 39145060</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>colorado_pop <span class="ot">&lt;-</span> population_data <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(STATE <span class="sc">==</span> <span class="dv">8</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">FIP =</span> <span class="fu">paste0</span>(<span class="fu">sprintf</span>(<span class="st">"%02d"</span>, STATE), <span class="fu">sprintf</span>(<span class="st">"%03d"</span>, COUNTY))) <span class="sc">%&gt;%</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(COUNTY <span class="sc">==</span> <span class="dv">0</span>) </span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>cumulative_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(pop_url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 3195 Columns: 67
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (5): SUMLEV, STATE, COUNTY, STNAME, CTYNAME
+dbl (62): REGION, DIVISION, ESTIMATESBASE2020, POPESTIMATE2020, POPESTIMATE2...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> covid_data <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"Colorado"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fips =</span> <span class="fu">str_pad</span>(fips, <span class="at">width =</span> <span class="dv">5</span>, <span class="at">pad =</span> <span class="st">"0"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(colorado_pop, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"fips"</span> <span class="ot">=</span> <span class="st">"FIP"</span>))</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_cases =</span> cases <span class="sc">-</span> <span class="fu">lag</span>(cases, <span class="at">default =</span> <span class="fu">first</span>(cases)), </span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_deaths =</span> deaths <span class="sc">-</span> <span class="fu">lag</span>(deaths, <span class="at">default =</span> <span class="fu">first</span>(deaths)),</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">per_capita_cumulative_cases =</span> cases <span class="sc">/</span> POPESTIMATE2021,</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">per_capita_new_cases =</span> new_cases <span class="sc">/</span> POPESTIMATE2021,</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">per_capita_new_deaths =</span> new_deaths <span class="sc">/</span> POPESTIMATE2021</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(merged_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 78
+  date       county state fips  cases deaths SUMLEV REGION DIVISION STATE COUNTY
+  &lt;date&gt;     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 2020-03-05 Dougl… Colo… 08035     1      0 &lt;NA&gt;       NA       NA &lt;NA&gt;  &lt;NA&gt;  
+2 2020-03-05 Jeffe… Colo… 08059     1      0 &lt;NA&gt;       NA       NA &lt;NA&gt;  &lt;NA&gt;  
+3 2020-03-06 Denver Colo… 08031     2      0 &lt;NA&gt;       NA       NA &lt;NA&gt;  &lt;NA&gt;  
+4 2020-03-06 Dougl… Colo… 08035     3      0 &lt;NA&gt;       NA       NA &lt;NA&gt;  &lt;NA&gt;  
+5 2020-03-06 Eagle  Colo… 08037     1      0 &lt;NA&gt;       NA       NA &lt;NA&gt;  &lt;NA&gt;  
+6 2020-03-06 El Pa… Colo… 08041     1      0 &lt;NA&gt;       NA       NA &lt;NA&gt;  &lt;NA&gt;  
+# ℹ 67 more variables: STNAME &lt;chr&gt;, CTYNAME &lt;chr&gt;, ESTIMATESBASE2020 &lt;dbl&gt;,
+#   POPESTIMATE2020 &lt;dbl&gt;, POPESTIMATE2021 &lt;dbl&gt;, POPESTIMATE2022 &lt;dbl&gt;,
+#   POPESTIMATE2023 &lt;dbl&gt;, NPOPCHG2020 &lt;dbl&gt;, NPOPCHG2021 &lt;dbl&gt;,
+#   NPOPCHG2022 &lt;dbl&gt;, NPOPCHG2023 &lt;dbl&gt;, BIRTHS2020 &lt;dbl&gt;, BIRTHS2021 &lt;dbl&gt;,
+#   BIRTHS2022 &lt;dbl&gt;, BIRTHS2023 &lt;dbl&gt;, DEATHS2020 &lt;dbl&gt;, DEATHS2021 &lt;dbl&gt;,
+#   DEATHS2022 &lt;dbl&gt;, DEATHS2023 &lt;dbl&gt;, NATURALCHG2020 &lt;dbl&gt;,
+#   NATURALCHG2021 &lt;dbl&gt;, NATURALCHG2022 &lt;dbl&gt;, NATURALCHG2023 &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>my.date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2021-01-01"</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>most_cumulative_cases_per_capita <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">==</span> my.date) <span class="sc">%&gt;%</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">per_capita_cumulative_cases =</span> cases <span class="sc">/</span> POPESTIMATE2021) <span class="sc">%&gt;%</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(per_capita_cumulative_cases)) <span class="sc">%&gt;%</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">Date =</span> date, <span class="at">County =</span> county, <span class="at">Per_Capita_Cumulative_Cases =</span> per_capita_cumulative_cases) <span class="sc">%&gt;%</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flextable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_caption</span>(<span class="st">"Top 5 Counties with the Most Cumulative Cases"</span>)</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>most_new_cases_per_capita <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">==</span> my.date) <span class="sc">%&gt;%</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">per_capita_new_cases =</span> new_cases <span class="sc">/</span> POPESTIMATE2021) <span class="sc">%&gt;%</span></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(per_capita_new_cases)) <span class="sc">%&gt;%</span></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">Date =</span> date, <span class="at">County =</span> county, <span class="at">Per_Capita_New_Cases =</span> per_capita_new_cases) <span class="sc">%&gt;%</span></span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flextable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_caption</span>(<span class="st">"Top 5 Counties with the Most New Cases"</span>)</span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>most_cumulative_cases_per_capita</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-347f85f8{}.cl-34740d2c{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3478d226{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3478d23a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3478f774{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3478f77e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3478f77f{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3478f788{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3478f792{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3478f793{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-347f85f8"><thead><tr style="overflow-wrap:break-word;"><th class="cl-3478f774"><p class="cl-3478d226"><span class="cl-34740d2c">Date</span></p></th><th class="cl-3478f77e"><p class="cl-3478d23a"><span class="cl-34740d2c">County</span></p></th><th class="cl-3478f774"><p class="cl-3478d226"><span class="cl-34740d2c">Per_Capita_Cumulative_Cases</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-3478f77f"><p class="cl-3478d226"><span class="cl-34740d2c">2021-01-01</span></p></td><td class="cl-3478f788"><p class="cl-3478d23a"><span class="cl-34740d2c">Adams</span></p></td><td class="cl-3478f77f"><p class="cl-3478d226"><span class="cl-34740d2c"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3478f77f"><p class="cl-3478d226"><span class="cl-34740d2c">2021-01-01</span></p></td><td class="cl-3478f788"><p class="cl-3478d23a"><span class="cl-34740d2c">Alamosa</span></p></td><td class="cl-3478f77f"><p class="cl-3478d226"><span class="cl-34740d2c"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3478f77f"><p class="cl-3478d226"><span class="cl-34740d2c">2021-01-01</span></p></td><td class="cl-3478f788"><p class="cl-3478d23a"><span class="cl-34740d2c">Arapahoe</span></p></td><td class="cl-3478f77f"><p class="cl-3478d226"><span class="cl-34740d2c"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3478f77f"><p class="cl-3478d226"><span class="cl-34740d2c">2021-01-01</span></p></td><td class="cl-3478f788"><p class="cl-3478d23a"><span class="cl-34740d2c">Archuleta</span></p></td><td class="cl-3478f77f"><p class="cl-3478d226"><span class="cl-34740d2c"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3478f792"><p class="cl-3478d226"><span class="cl-34740d2c">2021-01-01</span></p></td><td class="cl-3478f793"><p class="cl-3478d23a"><span class="cl-34740d2c">Baca</span></p></td><td class="cl-3478f792"><p class="cl-3478d226"><span class="cl-34740d2c"></span></p></td></tr></tbody></table></div>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>most_new_cases_per_capita</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-348f20bc{}.cl-34849ade{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3488fcc8{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3488fcd2{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-34892586{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-34892590{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3489259a{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-348925a4{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-348925a5{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-348925ae{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-348f20bc"><thead><tr style="overflow-wrap:break-word;"><th class="cl-34892586"><p class="cl-3488fcc8"><span class="cl-34849ade">Date</span></p></th><th class="cl-34892590"><p class="cl-3488fcd2"><span class="cl-34849ade">County</span></p></th><th class="cl-34892586"><p class="cl-3488fcc8"><span class="cl-34849ade">Per_Capita_New_Cases</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-3489259a"><p class="cl-3488fcc8"><span class="cl-34849ade">2021-01-01</span></p></td><td class="cl-348925a4"><p class="cl-3488fcd2"><span class="cl-34849ade">Adams</span></p></td><td class="cl-3489259a"><p class="cl-3488fcc8"><span class="cl-34849ade"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3489259a"><p class="cl-3488fcc8"><span class="cl-34849ade">2021-01-01</span></p></td><td class="cl-348925a4"><p class="cl-3488fcd2"><span class="cl-34849ade">Alamosa</span></p></td><td class="cl-3489259a"><p class="cl-3488fcc8"><span class="cl-34849ade"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3489259a"><p class="cl-3488fcc8"><span class="cl-34849ade">2021-01-01</span></p></td><td class="cl-348925a4"><p class="cl-3488fcd2"><span class="cl-34849ade">Arapahoe</span></p></td><td class="cl-3489259a"><p class="cl-3488fcc8"><span class="cl-34849ade"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3489259a"><p class="cl-3488fcc8"><span class="cl-34849ade">2021-01-01</span></p></td><td class="cl-348925a4"><p class="cl-3488fcd2"><span class="cl-34849ade">Archuleta</span></p></td><td class="cl-3489259a"><p class="cl-3488fcc8"><span class="cl-34849ade"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-348925a5"><p class="cl-3488fcc8"><span class="cl-34849ade">2021-01-01</span></p></td><td class="cl-348925ae"><p class="cl-3488fcd2"><span class="cl-34849ade">Baca</span></p></td><td class="cl-348925a5"><p class="cl-3488fcc8"><span class="cl-34849ade"></span></p></td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#4</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">as.Date</span>(date))</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>last_14_days <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>() <span class="sc">-</span> <span class="dv">14</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>last_14_days_data <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;=</span> last_14_days)</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>county_new_cases <span class="ot">&lt;-</span> last_14_days_data <span class="sc">%&gt;%</span></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(county, POPESTIMATE2021) <span class="sc">%&gt;%</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_new_cases =</span> <span class="fu">sum</span>(new_cases, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">new_cases_per_100k =</span> (total_new_cases <span class="sc">/</span> POPESTIMATE2021) <span class="sc">*</span> <span class="dv">100000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(new_cases_per_100k))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'county'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>top_5_counties <span class="ot">&lt;-</span> county_new_cases <span class="sc">%&gt;%</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>top_5_counties <span class="sc">%&gt;%</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flextable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_caption</span>(<span class="st">"Top 5 Counties with Most New Cases per 100,000 Residents"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-34b3eb4a{}.cl-34a9c732{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-34addbb0{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-34addbc4{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-34adff0a{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-34adff1e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-34b3eb4a"><thead><tr style="overflow-wrap:break-word;"><th class="cl-34adff0a"><p class="cl-34addbb0"><span class="cl-34a9c732">county</span></p></th><th class="cl-34adff1e"><p class="cl-34addbc4"><span class="cl-34a9c732">POPESTIMATE2021</span></p></th><th class="cl-34adff1e"><p class="cl-34addbc4"><span class="cl-34a9c732">total_new_cases</span></p></th><th class="cl-34adff1e"><p class="cl-34addbc4"><span class="cl-34a9c732">new_cases_per_100k</span></p></th></tr></thead></table></div>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>watch_list_counties <span class="ot">&lt;-</span> county_new_cases <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(new_cases_per_100k <span class="sc">&gt;</span> <span class="dv">100</span>)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>watch_list_counties_count <span class="ot">&lt;-</span> <span class="fu">nrow</span>(watch_list_counties)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(watch_list_counties_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#5</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>covid_2021_data <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;=</span> <span class="st">"2021-01-01"</span> <span class="sc">&amp;</span> date <span class="sc">&lt;=</span> <span class="st">"2021-12-31"</span>)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>county_deaths_2021 <span class="ot">&lt;-</span> covid_2021_data <span class="sc">%&gt;%</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(county) <span class="sc">%&gt;%</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_deaths =</span> <span class="fu">sum</span>(deaths, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">covid_deaths =</span> <span class="fu">sum</span>(new_deaths, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>county_deaths_2021 <span class="ot">&lt;-</span> county_deaths_2021 <span class="sc">%&gt;%</span></span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">covid_death_percentage =</span> (covid_deaths <span class="sc">/</span> total_deaths) <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>county_deaths_2021 <span class="sc">%&gt;%</span></span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flextable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_caption</span>(<span class="st">"Deaths from COVID in 2021 by County"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-34f0dd2a{}.cl-34e1bd18{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-34e6c0ba{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-34e6c0ce{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-34e700d4{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-34e700e8{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-34e700f2{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-34e700f3{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-34e700fc{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-34e70106{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-34f0dd2a"><thead><tr style="overflow-wrap:break-word;"><th class="cl-34e700d4"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">county</span></p></th><th class="cl-34e700e8"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">total_deaths</span></p></th><th class="cl-34e700e8"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">covid_deaths</span></p></th><th class="cl-34e700e8"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">covid_death_percentage</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Adams</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">279,442</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">273,147</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">97.7472964</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Alamosa</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">13,322</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-266,120</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-1,997.5979583</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Arapahoe</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">299,562</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">286,240</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">95.5528405</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Archuleta</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">992</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-298,570</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-30,097.7822581</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Baca</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">1,557</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">565</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">36.2877328</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Bent</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">8,510</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">6,953</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">81.7038778</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Boulder</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">95,785</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">87,275</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">91.1155191</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Broomfield</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">28,216</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-67,569</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-239.4705132</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Chaffee</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">9,771</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-18,445</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-188.7728994</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Cheyenne</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">2,265</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-7,506</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-331.3907285</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Clear Creek</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">1,290</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-975</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-75.5813953</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Conejos</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">7,639</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">6,349</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">83.1129729</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Costilla</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">2,002</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-5,637</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-281.5684316</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Crowley</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">6,500</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">4,498</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">69.2000000</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Custer</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">1,473</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-5,027</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-341.2763069</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Delta</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">25,795</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">24,322</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">94.2895910</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Denver</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">311,805</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">286,010</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">91.7272013</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Dolores</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">493</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-311,312</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-63,146.4503043</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Douglas</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">99,698</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">99,205</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">99.5055066</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Eagle</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">9,083</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-90,615</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-997.6329407</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">El Paso</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">333,557</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">324,474</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">97.2769272</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Elbert</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">5,980</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-327,577</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-5,477.8762542</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Fremont</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">25,796</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">19,816</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">76.8181113</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Garfield</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">18,256</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-7,540</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-41.3014899</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Gilpin</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">1,066</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-17,190</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-1,612.5703565</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Grand</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">3,158</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">2,092</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">66.2444585</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Gunnison</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">2,796</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-362</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-12.9470672</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Hinsdale</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">0</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-2,796</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-Inf</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Huerfano</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">6,593</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">6,593</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">100.0000000</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Jackson</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">0</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-6,593</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-Inf</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Jefferson</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">297,375</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">297,375</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">100.0000000</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Kiowa</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">1,173</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-296,202</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-25,251.6624041</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Kit Carson</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">4,943</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">3,770</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">76.2694720</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">La Plata</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">16,148</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">11,205</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">69.3893981</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Lake</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">203</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-15,945</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-7,854.6798030</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Larimer</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">95,039</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">94,836</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">99.7864035</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Las Animas</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">5,799</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-89,240</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-1,538.8860148</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Lincoln</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">1,783</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-4,016</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-225.2383623</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Logan</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">26,068</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">24,285</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">93.1601964</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Mesa</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">96,049</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">69,981</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">72.8596862</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Mineral</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">366</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-95,683</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-26,142.8961749</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Moffat</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">10,664</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">10,298</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">96.5678920</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Montezuma</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">10,697</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">33</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">0.3084977</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Montrose</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">25,705</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">15,008</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">58.3855281</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Morgan</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">35,270</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">9,565</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">27.1193649</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Otero</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">26,080</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-9,190</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-35.2377301</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Ouray</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">1,454</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-24,626</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-1,693.6726272</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Park</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">2,418</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">964</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">39.8676592</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Phillips</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">4,749</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">2,331</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">49.0840177</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Pitkin</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">1,617</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-3,132</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-193.6920223</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Prowers</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">9,142</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">7,525</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">82.3124043</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Pueblo</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">157,811</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">148,669</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">94.2069944</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Rio Blanco</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">2,071</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-155,740</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-7,520.0386287</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Rio Grande</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">6,648</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">4,577</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">68.8477738</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Routt</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">7,624</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">976</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">12.8016789</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Saguache</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">2,210</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-5,414</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-244.9773756</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">San Juan</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">61</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-2,149</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-3,522.9508197</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">San Miguel</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">614</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">553</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">90.0651466</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Sedgwick</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">1,144</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">530</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">46.3286713</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Summit</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">3,062</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">1,918</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">62.6387982</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Teller</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">7,764</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">4,702</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">60.5615662</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Washington</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">5,327</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-2,437</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-45.7480758</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700f2"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Weld</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">137,964</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">132,637</span></p></td><td class="cl-34e700f3"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">96.1388478</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-34e700fc"><p class="cl-34e6c0ba"><span class="cl-34e1bd18">Yuma</span></p></td><td class="cl-34e70106"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">6,304</span></p></td><td class="cl-34e70106"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-131,660</span></p></td><td class="cl-34e70106"><p class="cl-34e6c0ce"><span class="cl-34e1bd18">-2,088.5152284</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">#6</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>state_covid <span class="ot">=</span> covid_data <span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(date, state) <span class="sc">%&gt;%</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cases =</span> <span class="fu">sum</span>(cases)) <span class="sc">%&gt;%</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'New York'</span>, <span class="st">'Ohio'</span>, <span class="st">'Colorado'</span>, <span class="st">'Alabama'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">newCases =</span> cases <span class="sc">-</span> <span class="fu">log</span>(cases), <span class="at">roll =</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(newCases, <span class="at">k =</span> <span class="dv">7</span>, <span class="at">align =</span> <span class="st">'right'</span>, <span class="at">fill =</span> <span class="cn">NA</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'date'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#6</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(state_covid, <span class="fu">aes</span>(<span class="at">x =</span> date)) <span class="sc">+</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">y =</span> newCases), <span class="at">fill =</span> <span class="st">"pink"</span>, <span class="at">col =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> roll), <span class="at">col =</span> <span class="st">"darkred"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_linedraw</span>() <span class="sc">+</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>state, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cumulative COVID-19 Cases"</span>, <span class="at">x =</span> <span class="st">"Date"</span>, <span class="at">y =</span> <span class="st">"Case Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 6 rows containing missing values or values outside the scale range
+(`geom_line()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab_3_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co">#6</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>pp <span class="ot">=</span> pop <span class="sc">%&gt;%</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(STNAME) <span class="sc">|&gt;</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">population =</span> <span class="fu">sum</span>(POPESTIMATE2021)) <span class="sc">|&gt;</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(state_covid, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"STNAME"</span><span class="ot">=</span><span class="st">"state"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perCap =</span> newCases <span class="sc">/</span> population) <span class="sc">%&gt;%</span></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(STNAME) <span class="sc">%&gt;%</span></span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">roll =</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(perCap, <span class="at">k =</span> <span class="dv">7</span>, <span class="at">align =</span> <span class="st">"right"</span>, <span class="at">fill =</span> <span class="cn">NA</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#6</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pp, <span class="fu">aes</span>(<span class="at">x =</span> date)) <span class="sc">+</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> roll, <span class="at">col =</span> STNAME), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_linedraw</span>() <span class="sc">+</span> </span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cumulative COVID-19 Cases"</span>, <span class="at">x =</span> <span class="st">"Date"</span>, <span class="at">y =</span> <span class="st">"Case Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab_3_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co">#7</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/mikejohnson51/csu-ess-330/refs/heads/main/resources/county-centroids.csv'</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(covid_data) <span class="sc">%&gt;%</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(date) <span class="sc">%&gt;%</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">wmX_c =</span> <span class="fu">sum</span>(LON<span class="sc">*</span>cases)<span class="sc">/</span><span class="fu">sum</span>(cases), <span class="at">wmY_c =</span> <span class="fu">sum</span>(LAT<span class="sc">*</span>cases), <span class="at">cases =</span> <span class="fu">sum</span>(cases)) <span class="sc">%&gt;%</span></span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">date</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">d =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 3221 Columns: 3
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): fips
+dbl (2): LON, LAT
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Joining with `by = join_by(fips)`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(meta) <span class="sc">+</span> </span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">borders</span>(<span class="st">"state"</span>, <span class="at">fill =</span> <span class="st">"gray90"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> wmX_c, <span class="at">y =</span> wmY_c, <span class="at">size =</span> cases), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> .<span class="dv">25</span>) <span class="sc">+</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_linedraw</span>() <span class="sc">+</span> </span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Time"</span>, <span class="at">size =</span> <span class="st">"Cases"</span>, <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>, <span class="at">title =</span> <span class="st">"Weighted Center of COVID_19 Cases"</span>) <span class="sc">+</span> </span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab_3_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
